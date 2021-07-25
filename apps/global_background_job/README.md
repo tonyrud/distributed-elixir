@@ -1,21 +1,29 @@
 # GlobalBackgroundJob
 
-**TODO: Add description**
+Starts a distributed singleton process. Add any number of instances, and only one will be running the task in a timeout loop.
 
-## Installation
+## Starting nodes
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `global_background_job` to your list of dependencies in `mix.exs`:
+Terminal 1
 
-```elixir
-def deps do
-  [
-    {:global_background_job, "~> 0.1.0"}
-  ]
-end
+```bash
+iex --name n1 -S mix
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/global_background_job](https://hexdocs.pm/global_background_job).
+Terminal 2
 
+```bash
+iex --name n2 -S mix
+```
+
+There will only be one process running in global registry
+
+```bash
+:global.registered_names
+```
+
+Find the process pid
+
+```bash
+:global.whereis_name GlobalBackgroundJob.DatabaseCleaner
+```
