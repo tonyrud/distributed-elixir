@@ -8,4 +8,4 @@ mix deps.get
 
 ### SimpleCluster
 
-See [ReadME](./apps/simple_cluster.README.md)
+See [Starting Nodes](/apps/simple_cluster#starting-nodes)
