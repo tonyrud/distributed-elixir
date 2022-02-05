@@ -7,6 +7,7 @@ defmodule SimpleCluster.Ping do
   end
 
   def ping do
+    # shows OTHER nodes in the list
     Node.list()
     |> Enum.map(&GenServer.call({__MODULE__, &1}, :ping))
     |> Logger.info()
@@ -17,7 +18,10 @@ defmodule SimpleCluster.Ping do
 
   @impl GenServer
   def handle_call(:ping, from, state) do
-    Logger.info("--- Receiving ping from #{inspect(from)}")
+    Logger.info("""
+    --- Receiving ping from #{inspect(from)}
+    current state: #{inspect(state)}
+    """)
 
     {:reply, {:ok, node(), :pong}, state}
   end

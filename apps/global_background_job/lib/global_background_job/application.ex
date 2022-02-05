@@ -5,13 +5,15 @@ defmodule GlobalBackgroundJob.Application do
 
   @impl true
   def start(_type, _args) do
-    children = [
+    IO.inspect("starting #{__MODULE__}")
+
+    _children = [
       {Cluster.Supervisor, [topologies(), [name: GlobalBackgroundJob.ClusterSupervisor]]},
       {GlobalBackgroundJob.DatabaseCleaner.Starter, [timeout: :timer.seconds(5)]}
     ]
 
     opts = [strategy: :one_for_one, name: GlobalBackgroundJob.Supervisor]
-    Supervisor.start_link(children, opts)
+    Supervisor.start_link([], opts)
   end
 
   defp topologies do

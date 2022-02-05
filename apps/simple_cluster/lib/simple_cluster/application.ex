@@ -7,6 +7,8 @@ defmodule SimpleCluster.Application do
 
   @impl true
   def start(_type, _args) do
+    IO.inspect("starting #{__MODULE__}")
+
     children = [
       {Cluster.Supervisor, [topologies(), [name: SimpleCluster.ClusterSupervisor]]},
       SimpleCluster.Observer,
@@ -19,15 +21,21 @@ defmodule SimpleCluster.Application do
 
   defp topologies do
     [
-      example: [
-        strategy: Cluster.Strategy.Epmd,
-        config: [
-          hosts: [
-            :"n1@127.0.0.1",
-            :"n2@127.0.0.1"
-          ]
-        ]
+      background_job: [
+        strategy: Cluster.Strategy.Gossip
       ]
     ]
+
+    # [
+    #   example: [
+    #     strategy: Cluster.Strategy.Epmd,
+    #     config: [
+    #       hosts: [
+    #         :"n1@127.0.0.1",
+    #         :"n2@127.0.0.1"
+    #       ]
+    #     ]
+    #   ]
+    # ]
   end
 end
