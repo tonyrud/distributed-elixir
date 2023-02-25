@@ -7,13 +7,14 @@ OTP clustering fun. Uses libcluster with [Cluster.Strategy.Epmd](https://hexdocs
 Terminal 1
 
 ```bash
-iex --name n1@127.0.0.1 -S mix
+iex --sname n1@127.0.0.1 -S mix
 ```
 
 Terminal 2
 
 ```bash
-iex --name n2@127.0.0.1 -S mix
+iex --s
+name n2@127.0.0.1 -S mix
 ```
 
 Ping nodes in cluster

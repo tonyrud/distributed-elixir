@@ -10,7 +10,7 @@ defmodule SimpleCluster.Application do
     IO.inspect("starting #{__MODULE__}")
 
     children = [
-      {Cluster.Supervisor, [topologies(), [name: SimpleCluster.ClusterSupervisor]]},
+      {Cluster.Supervisor, [lib_cluster_topologies(), [name: SimpleCluster.ClusterSupervisor]]},
       SimpleCluster.Observer,
       SimpleCluster.Ping
     ]
@@ -19,7 +19,7 @@ defmodule SimpleCluster.Application do
     Supervisor.start_link(children, opts)
   end
 
-  defp topologies do
+  defp lib_cluster_topologies do
     [
       background_job: [
         strategy: Cluster.Strategy.Gossip
